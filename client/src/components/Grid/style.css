@@ -1,0 +1,31 @@
+.col-centered{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content:center;
+    align-items: center !important;
+    height:150px;
+}
+
+.col-book-search {
+    display:flex;
+    flex-direction: column;
+    border: 1px  black solid;
+    justify-content: center;
+    height: 200px;
+}
+.book-search-title-row{
+    height:20%;
+    position:relative;
+    top: 5%;
+    left: 1px;
+    padding-bottom:45px;
+
+}
+
+.col-book-results {
+    display:flex;
+    flex-direction: column;
+    border: 1px  black solid;
+    justify-content: center;
+    height: 200px;
+}
