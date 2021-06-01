@@ -6,26 +6,8 @@
     height:150px;
 }
 
-.col-book-search {
-    display:flex;
-    flex-direction: column;
+.container-fluid {
     border: 1px  black solid;
-    justify-content: center;
-    height: 200px;
-}
-.book-search-title-row{
-    height:20%;
-    position:relative;
-    top: 5%;
-    left: 1px;
-    padding-bottom:45px;
-
-}
-
-.col-book-results {
-    display:flex;
-    flex-direction: column;
-    border: 1px  black solid;
-    justify-content: center;
-    height: 200px;
+    padding-top: 20px;
+    min-height:fit-content;
 }

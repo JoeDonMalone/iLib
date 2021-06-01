@@ -1,0 +1,59 @@
+.container-fluid {
+    margin-bottom: 20px;
+}
+
+
+.col-book-search {
+    display:flex;
+    flex-direction: column;
+    
+    justify-content: center;
+}
+.col-search-results {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.book-search-title-row{
+    position:relative;
+    top: 10px;
+    left: 10px;
+    padding-bottom:15px;
+
+}
+
+.results-header-row{
+    display:flex;
+    align-items:center;
+
+}
+
+.results-details-img{
+    height:150px;
+    width:150px;
+}
+
+.col-book-results {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+}
+
+.col-results-text{
+    display: flex;
+    align-items: center;
+}
+
+.col-md-10 {
+}
+.col-md-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.results-form {
+    display: flex;
+    width: 120px;
+    flex-direction: column;
+}
