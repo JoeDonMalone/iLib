@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container, CenteredContainer } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
 import ResultsItems from "../components/ResultsItems";
+import { Input, FormBtn } from "../components/Form";
 import axios from "axios";
 
 function Books() {
@@ -17,7 +13,7 @@ function Books() {
 
   // Load all books and store them with setBooks
   useEffect(() => {
-    loadBooks();
+    // loadBooks();
   }, []);
 
   useEffect(() => {
@@ -25,22 +21,22 @@ function Books() {
   }, [results]);
 
   // Loads all books and sets them to books
-  function loadBooks() {
-    API.getBooks()
-      .then((res) => setBooks(res.data))
-      .catch((err) => console.log(err));
-  }
+  // function loadBooks() {
+  //   API.getBooks()
+  //     .then((res) => setBooks(res.data))
+  //     .catch((err) => console.log(err))
+  // }
 
   async function getBookResults() {
     console.log(results);
   }
 
   // Deletes a book from the database with a given id, then reloads books from the db
-  function deleteBook(id) {
-    API.deleteBook(id)
-      .then((res) => loadBooks())
-      .catch((err) => console.log(err));
-  }
+  // function deleteBook(id) {
+  //   API.deleteBook(id)
+  //     .then((res) => loadBooks())
+  //     .catch((err) => console.log(err));
+  // }
 
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
@@ -66,57 +62,58 @@ function Books() {
 
   
   return (
-    <Container fluid>
-      <CenteredContainer centered>
-        <Row fluid>
-          <Col size="md-12 centered">
-            <h1> (React) Google Book Search</h1>
-            <h4> Search for and Save Books of Interest</h4>
-          </Col>
-        </Row>
-      </CenteredContainer>
 
-      <Container fluid>
-        <Row fluid>
-          <Col size="md-12 book-search">
-            <Row className={" book-search-title-row"}>
-              <h5> Book Search </h5>
-            </Row>
-            <br></br>
-            <h6> Book </h6>
-            <form>
-              <Input
-                onChange={handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <FormBtn
-                // disabled={!(formObject.author && formObject.title)}
-                onClick={handleBookSearch}
-              >
-                Enter Search
-              </FormBtn>
-            </form>
-          </Col>
-        </Row>
-      </Container>
-      <br></br>
-      {results.length ? (
-      <Container fluid>
-        <Row className={"-fluid results-title-row"}>
-          <Col size="md-12 search-results">
-            <Row className={" results-title-row"}>
-              <h2> Results </h2>
-            </Row>
-            <br></br>
-            {/* className={`container-${centered ? "centered" : ""}`} */}
-            <ResultsItems props={results}></ResultsItems>
-          </Col>
-        </Row>
-      </Container>): (
-        <h5></h5>
-      )}
-    </Container>
+   <Container fluid>
+   <CenteredContainer centered>
+     <Row fluid>
+       <Col size="md-12 centered">
+         <h1> (React) Google Book Search</h1>
+         <h4> Search for and Save Books of Interest</h4>
+       </Col>
+     </Row>
+   </CenteredContainer>
+
+   <Container fluid>
+     <Row fluid>
+       <Col size="md-12 book-search">
+         <Row className={" book-search-title-row"}>
+           <h5> Book Search </h5>
+         </Row>
+         <br></br>
+         <h6> Book </h6>
+         <form>
+           <Input
+             onChange={handleInputChange}
+             name="title"
+             placeholder="Title (required)"
+           />
+           <FormBtn styleName = {'google-search'}
+             // disabled={!(formObject.author && formObject.title)}
+             onClick={handleBookSearch}
+           >
+             Enter Search
+           </FormBtn>
+         </form>
+       </Col>
+     </Row>
+   </Container>
+   <br></br>
+   {results.length ? (
+   <Container fluid>
+     <Row className={"-fluid results-title-row"}>
+       <Col size="md-12 search-results">
+         <Row className={" results-title-row"}>
+           <h2> Results </h2>
+         </Row>
+         <br></br>
+         {/* className={`container-${centered ? "centered" : ""}`} */}
+         <ResultsItems props={results}></ResultsItems>
+       </Col>
+     </Row>
+   </Container>) : (
+     <h5>Enter a Search!</h5>
+   )}
+ </Container>
   );
 }
 

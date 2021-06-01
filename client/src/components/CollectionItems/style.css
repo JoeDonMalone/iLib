@@ -53,11 +53,6 @@
     flex-direction: column;
 }
 
-.google-view {
-    background-color: #F4B400 !important;
+.danger{
+    background-color: red!important;
 }
-.google-save {
-    background-color: #0F9D58 !important;
-}
-
-
