@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI ) // , { useNewUrlParser: true, useUnifiedTopology: true }//|| "mongodb://localhost/iLib";
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // //|| "mongodb://localhost/iLib";
 // 
 // Start the API server
 app.listen(PORT, function() {

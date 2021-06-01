@@ -38,7 +38,6 @@ function ResultsItems({ props }) {
   async function handleSave(event, index) {
     event.preventDefault();
     let book = books[index];
-    console.log(book.author);
     if (book.title) {
       API.saveBook({
         title: book.title,
@@ -54,7 +53,6 @@ function ResultsItems({ props }) {
 
   async function handleView(event, index) {
     event.preventDefault();
-    console.log(index);
 
     // When the form is submitted, use the API.saveBook method to save the book data
     // Then reload books from the database

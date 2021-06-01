@@ -5,7 +5,13 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
-        iLib 
+        Google Books
+      </a>
+      <a className="navbar-brand minor-link" href="/search">
+        Search
+      </a>
+      <a className=" navbar-brand minor-link" href="/">
+        Saved
       </a>
     </nav>
   );
