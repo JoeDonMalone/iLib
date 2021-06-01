@@ -7,22 +7,32 @@ import { Col, Row, Container, CenteredContainer } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import ResultsItems from "../components/ResultsItems";
+import axios from "axios";
 
 function Books() {
   // Setting our component's initial state
   const [books, setBooks] = useState([]);
-  const [formObject, setFormObject] = useState({});
+  const [results, setResults] = useState([]);
+  const [formObject, setFormObject] = useState([]);
 
   // Load all books and store them with setBooks
   useEffect(() => {
     loadBooks();
   }, []);
 
+  useEffect(() => {
+    getBookResults();
+  }, [results]);
+
   // Loads all books and sets them to books
   function loadBooks() {
     API.getBooks()
       .then((res) => setBooks(res.data))
       .catch((err) => console.log(err));
+  }
+
+  async function getBookResults() {
+    console.log(results);
   }
 
   // Deletes a book from the database with a given id, then reloads books from the db
@@ -36,25 +46,25 @@ function Books() {
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormObject({ ...formObject, [name]: value });
-    
   }
 
-  // When the form is submitted, use the API.saveBook method to save the book data
-  // Then reload books from the database
-  function handleFormSubmit(event) {
+  // When the form is submitted, use the Google API Call to call book data from Google books
+  // Then updates book results state
+
+  async function handleBookSearch(event) {
     event.preventDefault();
-    console.log('here')
     if (formObject.title) {
-      API.saveBook({
-        title: formObject.title,
-        author: formObject.author,
-        synopsis: formObject.synopsis,
-      })
-        .then((res) => loadBooks())
+      await axios
+        .get(`https://www.googleapis.com/books/v1/volumes?q=${formObject.title}&key=AIzaSyCWWqbANIMpiaBiaUArF3bSe2Dj8eBCufs`)
+        .then(
+          async (res) => setResults(res.data.items)
+        )
         .catch((err) => console.log(err));
     }
   }
 
+
+  
   return (
     <Container fluid>
       <CenteredContainer centered>
@@ -82,7 +92,7 @@ function Books() {
               />
               <FormBtn
                 // disabled={!(formObject.author && formObject.title)}
-                onClick={handleFormSubmit}
+                onClick={handleBookSearch}
               >
                 Enter Search
               </FormBtn>
@@ -99,17 +109,8 @@ function Books() {
               <h5> Results </h5>
             </Row>
             <br></br>
-
-            <ResultsItems
-              props={{
-                title: "The Dead Zone",
-                author: "Stephen King",
-                synopsis:
-                  'A number-one national best seller about a man who wakes up from a five-year coma able to see people\'s futures and the terrible fate awaiting mankind in The Dead Zone - a "compulsive page-turner" (The Atlanta Journal-Constitution). Johnny Smith awakens from a five-year coma after his car accident and discovers that he can see people\'s futures and pasts when he touches them. Many consider his talent a gift; Johnny feels cursed. His fiancée married another man during his coma, and people clamor for him to solve their problems. When Johnny has a disturbing vision after he shakes the hand of an ambitious and amoral politician, he must decide if he should take drastic action to change the future. The Dead Zone is a "faultlessly paced...continuously engrossing" (Los Angeles Times) novel of second sight.',
-                date: "2021-05-31T16:59:16.276Z",
-                onClick: handleFormSubmit
-              }}
-            ></ResultsItems>
+            {/* className={`container-${centered ? "centered" : ""}`} */}
+            <ResultsItems props={results}></ResultsItems>
           </Col>
         </Row>
       </Container>

@@ -28,11 +28,6 @@
 
 }
 
-.results-details-img{
-    height:150px;
-    width:150px;
-}
-
 .col-book-results {
     display:flex;
     flex-direction: column;
