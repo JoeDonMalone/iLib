@@ -14,7 +14,7 @@ function Detail(props) {
     API.getBook(id)
       .then(res => setBook(res.data))
       .catch(err => console.log(err));
-  }, [])
+  })
 
   return (
       <Container fluid>

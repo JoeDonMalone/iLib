@@ -1,14 +1,8 @@
-import React, { useState, setState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "../Grid";
-import { Input, TextArea, FormBtn } from "../Form";
+import { FormBtn } from "../Form";
 import API from "../../utils/API";
 import "./style.css";
-
-// title: { type: String, required: true },
-// authors: { type: String, required: true },
-// image: { type: String, required: true },
-// link: { type: String, required: false },
-// description: String,
 
 function ResultsItems({ props }) {
   const [books, setBooks] = useState([]);
@@ -18,20 +12,28 @@ function ResultsItems({ props }) {
   }, [props]);
 
   const updateBooks = async (props) => {
+    console.log(props);
     let collection = [];
 
     await props.map((item, index) => {
       const id = index;
       const title = item.volumeInfo.title;
       const author = item.volumeInfo.authors.join(", ");
+      const snippet = item.searchInfo.textSnippet
       const description = item.volumeInfo.description;
       const image = item.volumeInfo.imageLinks.thumbnail;
-      const link = item.selfLink;
-      return collection.push({ id, title, author, description, image, link });
+      const link = item.volumeInfo.infoLink;
+      return collection.push({ id,  title, author, snippet, description, image, link });
     });
 
     setBooks(collection);
   };
+
+  function viewBook(e, url) {
+    e.preventDefault();
+    console.log(url);
+    window.open(`${url}&key=AIzaSyCWWqbANIMpiaBiaUArF3bSe2Dj8eBCufs`, "_blank");
+  }
 
   // When the form is submitted, use the API.saveBook method to save the book data
   // Then reload books from the database
@@ -42,61 +44,37 @@ function ResultsItems({ props }) {
       API.saveBook({
         title: book.title,
         author: book.author,
+        snippet: book.snippet,
         description: book.description,
         image: book.image,
         link: book.link,
       })
-        .then(async (res) => console.log(res))//loadBooks())
+        .then(async (res) => console.log(res)) //loadBooks())
         .catch((err) => console.log(err));
     }
   }
 
-  async function handleView(event, index) {
-    event.preventDefault();
-
-    // When the form is submitted, use the API.saveBook method to save the book data
-    // Then reload books from the database
-    // async function handleFormSubmit(event) {
-    //   event.preventDefault();
-    //   if (formObject.title) {
-    //     API.saveBook({
-    //       title: formObject.title,
-    //       author: formObject.author,
-    //       synopsis: formObject.synopsis,
-    //     })
-    //       .then(async (res) => loadBooks())
-    //       .catch((err) => console.log(err));
-    //   }
-    // }
-  }
-
-  //   <Link to={"/books/" + book._id}>
-  //   <strong>
-  //     {book.title} by {book.author}
-  //   </strong>
-  // </Link>
-  // <DeleteBtn onClick={() => deleteBook(book._id)} />
   return books.map((book, index) => (
     <Container fluid key={`container-${index}`}>
       <Row className={" results-header-row"} key={`row-${index}`}>
         <Col size="md-10" key={`col-${index}`}>
-          <Row fluid>{book.title}</Row>
-          <Row fluid>Description </Row>
-          <Row fluid>{book.author}</Row>
+          <Row fluid><b>{book.title}</b></Row>
+          <Row fluid><b>{book.snippet}</b> </Row>
+          <Row fluid><b>{book.author}</b></Row>
         </Col>
         <Col size="md-2 results-buttons">
           <form className={"results-form"}>
-            <FormBtn stylename = {'google-save'} 
+            <FormBtn
+              stylename={"google-save"}
               onClick={(e) => {
                 handleSave(e, index);
               }}
             >
               Save
             </FormBtn>
-            <FormBtn stylename = {'google-view'}
-              onClick={(e) => {
-                handleView(e, index);
-              }}
+            <FormBtn
+              stylename={"google-view"}
+              onClick={(e) => viewBook(e, book.link)}
             >
               View
             </FormBtn>
@@ -109,7 +87,6 @@ function ResultsItems({ props }) {
         <Col size="md-2">
           <Row className={" results-details-img"}>
             <img
-              // src= {"https://via.placeholder.com/150.png"} //{book.imageSRC}
               src={
                 !book.image ? "https://via.placeholder.com/150.png" : book.image
               }
@@ -118,7 +95,7 @@ function ResultsItems({ props }) {
           </Row>
         </Col>
         <Col size="md-10 results-text">
-          <p>{book.description}</p>
+          <p><b>{book.description}</b></p>
         </Col>
       </Row>
       <br />
