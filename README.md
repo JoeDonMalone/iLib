@@ -1,30 +1,32 @@
 # iLib
 [iLib](https://frozen-castle-25000.herokuapp.com/)
 
-- A simple app to explore new reading material, save it for later, and delete it when finished. 
+- A simple app to explore new reading material, save it for later, filter for specific title or author, and delete it when finished. 
 
-![Example screenshot](./Assets/Images/Readme_capture.JPG
-)
+![Example screenshot](./Assets/example.jpg)
 
 # Viewed Here:
-- Pages: https://joedonmalone.github.io/WeatherBee/
-- github: https://github.com/JoeDonMalone/WeatherBee
+- [Heroku](https://frozen-castle-25000.herokuapp.com/)
+- [github](https://github.com/JoeDonMalone/iLib)
 
 ## Description
-- I built this application as a means to assist in gather current and future weather data in a simple, friendly way, with a comfortable UI
-- Lessons Learned:
-  * It gets weather quickly and displays it obviously
-## Installation
-- The only steps to use the Application are to navigate to the webpage and enter your search city and destination
+- The goal was to implement a fully functional and user friendly MERN application which utilized the below technologies. It is a simple application, but displays competencies with back-end and front-end development. 
+
+## Technologies:
+  *  REACT
+  *  axios
+  *  bootstrap
+  *  express
+  *  mongoose
+
 ## Usage
- - Anyone can use this application, but it only has access to cities within the US.
+ - Functional for the 'Volumes' of the Google Books API. I will perhaps imlement a feature that add directly to specific users 'google bookshelf' and create their own database, but it will be some time in the future. 
 ## Credits
- - [OpenWeatherMap](https://www.openweathermap.org/api)
+ - [Google Books](https://developers.google.com/books)
 ## License
  - Licensed under the [MIT](./Assets/license.txt) license.
 ## Badges
  - NA
-## Features
- - In the future, I'd like to include a live doppler radar.
+
 ## Tests
  - None

@@ -81,7 +81,7 @@ function Collections() {
           </Col>
         </Row>
       </Container>) : (
-     <h5>Enter a Search!</h5>
+     <h5>No Books Added!</h5>
    )}
     </Container>
   );

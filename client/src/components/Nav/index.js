@@ -1,20 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css"
 
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a className="navbar-brand" href="/">
+      <Link to="/" className="navbar-brand">
         Google Books
-      </a>
-      <a className="navbar-brand minor-link" href="/search">
+      </Link>
+      <Link to="/search" className="navbar-brand minor-link">
         Search
-      </a>
-      <a className=" navbar-brand minor-link" href="/collections">
+      </Link>
+      <Link to="/collections" className=" navbar-brand minor-link">
         Saved
-      </a>
+        </Link>
     </nav>
   );
 }
+
 
 export default Nav;
