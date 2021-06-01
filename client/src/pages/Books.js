@@ -101,19 +101,21 @@ function Books() {
         </Row>
       </Container>
       <br></br>
-
+      {results.length ? (
       <Container fluid>
         <Row className={"-fluid results-title-row"}>
           <Col size="md-12 search-results">
             <Row className={" results-title-row"}>
-              <h5> Results </h5>
+              <h2> Results </h2>
             </Row>
             <br></br>
             {/* className={`container-${centered ? "centered" : ""}`} */}
             <ResultsItems props={results}></ResultsItems>
           </Col>
         </Row>
-      </Container>
+      </Container>): (
+        <h5></h5>
+      )}
     </Container>
   );
 }
